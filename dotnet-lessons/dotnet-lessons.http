@@ -1,0 +1,6 @@
+@dotnet_lessons_HostAddress = http://localhost:5216
+
+GET {{dotnet_lessons_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

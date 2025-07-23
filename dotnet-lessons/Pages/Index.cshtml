@@ -1,0 +1,23 @@
+@page
+@model dotnet_lessons.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h2 class="card-title text-primary mb-4">Welcome to the Home Page</h2>
+                    <p class="lead">You have successfully logged in.</p>
+
+                    <div class="mt-4">
+                        <a class="btn btn-outline-primary me-2" asp-page="/Account/Profile">Go to Profile</a>
+                        <a class="btn btn-danger" asp-page="/Account/Logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
