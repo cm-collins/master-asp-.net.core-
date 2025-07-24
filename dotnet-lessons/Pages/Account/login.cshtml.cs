@@ -1,3 +1,15 @@
+//explanation of the IAuthentication Interface in . net through  the Abstraction method
+// The IAuthentication interface in .NET is part of the ASP.NET Core framework and provides a
+// way to handle user authentication. It defines methods for signing in, signing out, and checking
+// if a user is authenticated. This interface is typically implemented by authentication handlers,
+// which are responsible for managing the authentication process, such as validating credentials,
+// issuing tokens, and maintaining user sessions. The abstraction allows developers to create custom
+// authentication schemes while adhering to a consistent interface, making it easier to integrate
+// different authentication mechanisms (like cookies, JWT, etc.) into ASP.NET Core applications.    
+// The IAuthentication interface is not directly used in the code above, but it is part of the
+// underlying authentication system that the HttpContext.SignInAsync method interacts with.
+// The code above implements a simple login page using Razor Pages in ASP.NET Core. It defines a
+
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -26,7 +38,8 @@ namespace dotnet_lessons.Pages.Account
                 var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, "admin"),
-            new Claim(ClaimTypes.Email, "admin@example.com")
+            new Claim(ClaimTypes.Email, "admin@example.com"),
+            new Claim ("Department", "Hr")
         };
 
                 var identity = new ClaimsIdentity(claims, "MyCookieAuthentication");
@@ -55,14 +68,3 @@ namespace dotnet_lessons.Pages.Account
 
 }
 
-//explanation of the IAuthentication Interface in . net through  the Abstraction method
-// The IAuthentication interface in .NET is part of the ASP.NET Core framework and provides a
-// way to handle user authentication. It defines methods for signing in, signing out, and checking
-// if a user is authenticated. This interface is typically implemented by authentication handlers,
-// which are responsible for managing the authentication process, such as validating credentials,
-// issuing tokens, and maintaining user sessions. The abstraction allows developers to create custom
-// authentication schemes while adhering to a consistent interface, making it easier to integrate
-// different authentication mechanisms (like cookies, JWT, etc.) into ASP.NET Core applications.    
-// The IAuthentication interface is not directly used in the code above, but it is part of the
-// underlying authentication system that the HttpContext.SignInAsync method interacts with.
-// The code above implements a simple login page using Razor Pages in ASP.NET Core. It defines a

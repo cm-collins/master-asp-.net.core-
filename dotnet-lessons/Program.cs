@@ -11,6 +11,10 @@ builder.Services.AddAuthentication("MyCookieAuthentication").AddCookie("MyCookie
     options.AccessDeniedPath = "/Account/AccessDenied"; // Redirect if access is denied
 
 });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("MustBelongToHrDepartment", policy => policy.RequireClaim("Department", "HR"));
+});
 
 // Add OpenAPI/Swagger if needed
 builder.Services.AddOpenApi();
