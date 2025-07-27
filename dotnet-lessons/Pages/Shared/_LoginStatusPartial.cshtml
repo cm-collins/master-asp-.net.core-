@@ -1,0 +1,15 @@
+@if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+{
+<!-- _LoginStatusPartial.cshtml -->
+<form asp-page="/Account/Logout" method="post">
+    <span class="text-muted">Hello, @User.Identity?.Name!</span>
+    <button type="submit" class="btn btn-link">Logout</button>
+</form>
+
+
+}
+
+else
+{
+    <a class="btn btn-link" asp-page="/Account/Login">Login</a>
+}

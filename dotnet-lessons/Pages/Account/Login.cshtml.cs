@@ -23,7 +23,7 @@ namespace dotnet_lessons.Pages.Account
         [BindProperty]
         public Credential Credential { get; set; } = new Credential();
 
-        public async Task<IActionResult> OnGet()
+        public IActionResult OnGet()
         {
             return Page();
         }
@@ -36,18 +36,26 @@ namespace dotnet_lessons.Pages.Account
             if (Credential.UserName == "admin" && Credential.Password == "password")
             {
                 var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, "admin"),
-            new Claim(ClaimTypes.Email, "admin@example.com"),
-            new Claim ("Department", "Hr")
-        };
+            {
+                new Claim(ClaimTypes.Name, "admin"),
+                new Claim(ClaimTypes.Email, "admin@example.com"),
+                new Claim ("Department", "Hr"),
+                new Claim ("Admin", "true"),
+                new Claim("Manager","true"),
+                new Claim("EmploymentDate", DateTime.Now.ToString("yyyy-MM-dd"))
+            };
 
                 var identity = new ClaimsIdentity(claims, "MyCookieAuthentication");
                 var claimsPrincipal = new ClaimsPrincipal(identity);
 
-                await HttpContext.SignInAsync("MyCookieAuthentication", claimsPrincipal);
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = Credential.RememberMe // Set persistent cookie if Remember Me is checked
+                };
 
-                return RedirectToPage("/Index");
+                await HttpContext.SignInAsync("MyCookieAuthentication", claimsPrincipal, authProperties);
+
+                return RedirectToPage("/Index"); // Redirect to home page after successful login
             }
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
@@ -64,6 +72,11 @@ namespace dotnet_lessons.Pages.Account
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; } = string.Empty;
+
+        [Display(Name = "Remember Me")]
+        public bool RememberMe { get; set; } = false;
+
+        
     }
 
 }
